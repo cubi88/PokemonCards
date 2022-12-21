@@ -20,9 +20,6 @@ State/Binding.
 Writing Unit tests for success and failure situations for viewmodels.
 Mocked responses using FakeNetworkManager and Protocol from local test json file.
 
-## Localisation 
-Added support for localisation.
-
 ## UI Screens
 
 ### Home screen 
