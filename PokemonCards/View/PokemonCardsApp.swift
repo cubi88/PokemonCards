@@ -11,7 +11,7 @@ import SwiftUI
 struct PokemonCardsApp: App {
     var body: some Scene {
         WindowGroup {
-            PokemonCardsListView()
+            PokemonCardsListView(viewModel: PokemonCardsListViewModel(repository: PokemonCardsRepositoryImplementation(networkManager: NetworkManager())))
         }
     }
 }

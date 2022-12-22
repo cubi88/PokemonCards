@@ -10,23 +10,16 @@ import Foundation
 
 
 class FakeNetworkManager: Fetchable {
-    var fileName: String
-    init(fileName: String) {
-        self.fileName = fileName
-    }
-    
-    func fetch<T: Decodable>
-    (request: Request, type:T.Type, callback: @escaping (Result<T, Error>)->Void)  {
-        let bundle = Bundle(for: FakeNetworkManager.self)
-        guard let path =  bundle.url(forResource: self.fileName, withExtension: "json") else { return }
-        guard let data = try? Data(contentsOf: path) else { return }
-        let jsonDecoder = JSONDecoder()
+    func get(url: URL) async throws -> Data {
         do {
-            let responce = try jsonDecoder.decode(type, from: data)
-            callback(.success(responce))
+            let bundle = Bundle(for: FakeNetworkManager.self)
+            guard let path =  bundle.url(forResource:url.absoluteString, withExtension: "json") else {
+                throw NetworkError.invalidUrl
+            }
+            let data = try Data(contentsOf: path)
+            return data
         } catch {
-            callback(.failure(error))
+            throw NetworkError.dataNotFound
         }
     }
-    
 }

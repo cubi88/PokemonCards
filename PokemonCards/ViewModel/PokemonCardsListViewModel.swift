@@ -1,40 +1,50 @@
 //
-//  DogBreedsViewModel.swift
-//  DogBreeds
+//  PokemonCardsListViewModel.swift
+//  PokemonCards
 //
 //  Created by Tsvetelina Cholakova on 19/12/2022.
 //
 
 import Foundation
+import Combine
 
-class PokemonCardsListViewModel: ObservableObject {
+protocol PokemonCardsListViewModelAction: ObservableObject {
+    func getPokemonCards(urlStr: String)
+}
+
+final class PokemonCardsListViewModel {
     @Published var pokemonCards: [Pokemon] = []
-    @Published var pokemonImages: [Images] = []
     @Published var errorOccured: Bool = false
-    
-    var networkManager: Fetchable
-    
-    
-    init(networkManager: Fetchable) {
-        self.networkManager = networkManager
+    private let repository: PokemonCardsRepository
+    private var cancellables = Set<AnyCancellable>()
+        
+    init(repository: PokemonCardsRepository) {
+        self.repository = repository
     }
     
-    func fetchPokemonList() {
-        let request = Request(baseUrl:"https://api.pokemontcg.io", path:"/v2/cards?page=1&pageSize=15", params: [:], type: "GET", header: [:])
-        
-        networkManager.fetch(request: request, type: PokemonListData.self) { result in
-            switch result {
-            case .success(let cards):
-                print(cards)
-               // DispatchQueue.main.async {
-                    self.pokemonCards = cards.data
-                //}
-                self.errorOccured = false
-            case .failure(let error):
-                print(error)
-                self.errorOccured = true
-                
+}
+
+extension PokemonCardsListViewModel: PokemonCardsListViewModelAction {
+    func getPokemonCards(urlStr: String) {
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        Task {
+            do {
+                let cards = try await repository.getCards(for: url)
+                dataToPublisher(allCards: cards.data)
+            }catch {
+                dataToPublisher(allCards: [])
             }
         }
     }
+}
+
+extension PokemonCardsListViewModel {
+    private func dataToPublisher(allCards: [Pokemon]) {
+         DispatchQueue.main.async {
+             self.pokemonCards = allCards
+         }
+     }
+
 }

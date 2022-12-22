@@ -12,7 +12,7 @@ struct PokemonCardsDetailView: View {
     
     var body: some View {
         VStack {
-            Text(name.uppercased())
+            Text("Pokemon Name: " + name.uppercased())
                 .padding()
                 .font(.headline)
             AsyncImage(

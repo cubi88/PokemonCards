@@ -1,6 +1,6 @@
 //
-//  Breed.swift
-//  DogBreeds
+//  Pokemon.swift
+//  PokemonCards
 //
 //  Created by Tsvetelina Cholakova on 19/12/2022.
 //

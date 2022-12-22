@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  PokemonCards
+
+  Created by Tsvetelina Cholakova on 21/12/2022.
+  
+*/
+
+
+"Pokemon Cards" = "Pokemon Cards";
+"Pokemon Name: " = "Pokemon Name: ";
+"General_Error" = "Someting went wrong";

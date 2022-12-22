@@ -10,46 +10,67 @@ import XCTest
 
 final class PokemonCardsListViewModelTest: XCTestCase {
     
-    var fakeNetworkManager: FakeNetworkManager!
-    
+    var fakePokemonCardRepository: FakePokemonCardsRepository!
+    var pokemonCardsListViewModel : PokemonCardsListViewModel!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        fakeNetworkManager = FakeNetworkManager(fileName: "PokemonCardsMock")
+        fakePokemonCardRepository = FakePokemonCardsRepository()
+        pokemonCardsListViewModel = PokemonCardsListViewModel(repository: fakePokemonCardRepository)
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        fakeNetworkManager = nil
+        fakePokemonCardRepository = nil
     }
 
-    func testFetchPokemonList() throws {
-        let pokemonCardsListViewModel = PokemonCardsListViewModel(networkManager: fakeNetworkManager)
+    // when url is Incorrect , it will directly return empty array
+    func test_GetPokemonCards_when_url_isIncorrect()  {
+        pokemonCardsListViewModel.getPokemonCards(urlStr: "")
+        XCTAssertEqual(pokemonCardsListViewModel.pokemonCards.count, 0)
+    }
+    
+    // when url is Correct , it will  return data in array
+    func testGetPokemonCards() throws {
         XCTAssertNotNil(pokemonCardsListViewModel)
         
-        pokemonCardsListViewModel.fetchPokemonList()
+        pokemonCardsListViewModel.getPokemonCards(urlStr: "testURL")
         
-        let pokemonCard = pokemonCardsListViewModel.pokemonCards[0]
-        XCTAssertEqual(pokemonCard.name, "Absol G")
-        
-        XCTAssertNotNil(pokemonCardsListViewModel.pokemonCards)
-        XCTAssertGreaterThan(pokemonCardsListViewModel.pokemonCards.count, 10)
+        let expectation = XCTestExpectation(
+            description: "Fetching Pokemon Cards"
+        )
+        let asyncWaitDuration = 10.0 //
+        DispatchQueue.main.asyncAfter(deadline: .now() + asyncWaitDuration) {
+            let pokemonCard = self.pokemonCardsListViewModel.pokemonCards[0]
+
+            XCTAssertEqual(pokemonCard.name, "Absol G")
+            
+            XCTAssertNotNil(self.pokemonCardsListViewModel.pokemonCards)
+            XCTAssertEqual(self.pokemonCardsListViewModel.pokemonCards.count, 15)
+
+            XCTAssertGreaterThan(self.pokemonCardsListViewModel.pokemonCards.count, 10)
+
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: asyncWaitDuration)
+
     }
     
-    func testErrorIsFalse() {
-        let pokemonCardsListViewModel = PokemonCardsListViewModel(networkManager: fakeNetworkManager)
-        pokemonCardsListViewModel.fetchPokemonList()
-        XCTAssertEqual(pokemonCardsListViewModel.errorOccured, false)
+    func test_GetPokemonCards_when_url_isCorrectBut_API_Fails()  {
+        let expectation = XCTestExpectation(
+            description: "Fetching Pokemon Cards"
+        )
+        
+        fakePokemonCardRepository.error = .dataNotFound
+
+        pokemonCardsListViewModel.getPokemonCards(urlStr: "PokemonCardsMock")
+        let asyncWaitDuration = 10.0 //
+        DispatchQueue.main.asyncAfter(deadline: .now() + asyncWaitDuration) {
+
+            
+            XCTAssertNotNil(self.pokemonCardsListViewModel.pokemonCards)
+            XCTAssertEqual(self.pokemonCardsListViewModel.pokemonCards.count, 0)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: asyncWaitDuration)
+
     }
-    
-//    func testErrorIsTrue() {
-//        let fakeNetworkManager = FakeNetworkManager(fileName: "")
-//        let pokemonCardsListViewModel = PokemonCardsListViewModel(networkManager: fakeNetworkManager)
-//        pokemonCardsListViewModel.fetchPokemonList()
-//        XCTAssertEqual(pokemonCardsListViewModel.errorOccured, true)
-//    }
-    
-    
-
-   
-
 }

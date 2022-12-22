@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  DogBreeds
+//  PokemonCards
 //
 //  Created by Tsvetelina Cholakova on 19/12/2022.
 //
@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PokemonCardsListView: View {
     
-    @ObservedObject var viewModel = PokemonCardsListViewModel(networkManager: NetworkManager())
+    @StateObject var viewModel : PokemonCardsListViewModel
     
     let columns = [ GridItem(), GridItem()]
     
@@ -27,7 +27,7 @@ struct PokemonCardsListView: View {
                 }
                 .navigationTitle("Pokemon Cards")
                 .onAppear{
-                    viewModel.fetchPokemonList()
+                    viewModel.getPokemonCards(urlStr: Endpoint.pokemonUrl)
                 }
                 .navigationDestination(for: Pokemon.self) { pokemon in
                     VStack {
@@ -41,6 +41,6 @@ struct PokemonCardsListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonCardsListView()
+        PokemonCardsListView(viewModel: PokemonCardsListViewModel(repository: PokemonCardsRepositoryImplementation(networkManager: NetworkManager())))
     }
 }
