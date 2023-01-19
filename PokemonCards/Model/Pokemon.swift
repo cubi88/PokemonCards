@@ -14,7 +14,6 @@ struct Pokemon: Codable, Hashable {
     var id: String
     let name: String
     let images: Images
-    
 }
 struct Images: Codable, Hashable {
     let small: String

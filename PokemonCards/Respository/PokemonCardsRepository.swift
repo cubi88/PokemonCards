@@ -11,8 +11,7 @@ import Combine
 protocol PokemonCardsRepository{
     func getCards(for url: URL) async throws -> PokemonListData
 }
-
-final class PokemonCardsRepositoryImplementation {
+struct PokemonCardsRepositoryImplementation {
     private let networkManager: Fetchable
     private var cancellables = Set<AnyCancellable>()
 
@@ -25,6 +24,5 @@ extension PokemonCardsRepositoryImplementation: PokemonCardsRepository {
         let cardsData =  try await networkManager.get(url: url)
         let cards = try JSONDecoder().decode(PokemonListData.self, from: cardsData )
         return cards
-
     }
 }

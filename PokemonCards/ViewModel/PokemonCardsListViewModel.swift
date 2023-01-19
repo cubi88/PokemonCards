@@ -11,7 +11,6 @@ import Combine
 protocol PokemonCardsListViewModelAction: ObservableObject {
     func getPokemonCards(urlStr: String)
 }
-
 final class PokemonCardsListViewModel {
     @Published var pokemonCards: [Pokemon] = []
     @Published var errorOccured: Bool = false
@@ -21,9 +20,7 @@ final class PokemonCardsListViewModel {
     init(repository: PokemonCardsRepository) {
         self.repository = repository
     }
-    
 }
-
 extension PokemonCardsListViewModel: PokemonCardsListViewModelAction {
     func getPokemonCards(urlStr: String) {
         guard let url = URL(string: urlStr) else {
@@ -39,12 +36,10 @@ extension PokemonCardsListViewModel: PokemonCardsListViewModelAction {
         }
     }
 }
-
 extension PokemonCardsListViewModel {
     private func dataToPublisher(allCards: [Pokemon]) {
          DispatchQueue.main.async {
              self.pokemonCards = allCards
          }
      }
-
 }

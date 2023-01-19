@@ -10,7 +10,6 @@ import SwiftUI
 struct PokemonCardsListView: View {
     
     @StateObject var viewModel : PokemonCardsListViewModel
-    
     let columns = [ GridItem(), GridItem()]
     
     var body: some View {
@@ -38,7 +37,6 @@ struct PokemonCardsListView: View {
         }
     }
 }
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         PokemonCardsListView(viewModel: PokemonCardsListViewModel(repository: PokemonCardsRepositoryImplementation(networkManager: NetworkManager())))
