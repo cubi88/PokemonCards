@@ -8,19 +8,13 @@
 import Foundation
 import Combine
 
-enum NetworkError: Error {
-    case parsingFailed
-    case invalidUrl
-    case dataNotFound
-}
-protocol NetworkActions {
-    func get(url: URL) async throws -> Data
-}
-struct NetworkManager: Fetchable {
+struct NetworkManager {
     let urlSession: Networking
     init(urlSession: Networking = URLSession.shared) {
         self.urlSession = urlSession
+    }
 }
+extension NetworkManager: Fetchable {
     func get(url: URL) async throws -> Data {
         do {
             let (data, _) = try await  urlSession.data(from: url)

@@ -12,11 +12,9 @@ protocol PokemonCardsListViewModelAction: ObservableObject {
     func getPokemonCards(urlStr: String)
 }
 final class PokemonCardsListViewModel {
-    @Published var pokemonCards: [Pokemon] = []
-    @Published var errorOccured: Bool = false
+    @Published private(set) var pokemonCards: [Pokemon] = []
+    @Published private(set) var errorOccured: Bool = false
     private let repository: PokemonCardsRepository
-    private var cancellables = Set<AnyCancellable>()
-        
     init(repository: PokemonCardsRepository) {
         self.repository = repository
     }

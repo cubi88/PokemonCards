@@ -26,13 +26,11 @@ final class NetworkManagerTests: XCTestCase {
         XCTAssertEqual(actualData, data)
     }
     /**
-     when api is successfull but json parsing fails
-     Fetch function will return jsonParsingFailed exception
+     when api is not successfull it will return data not found error
      */
-    func test_get_coins_when_api_failes() async {
+    func test_get_pokemon_when_api_fails() async {
         let networkManager = NetworkManager(urlSession: NetworkingMock())
         let url = URL(string:"https://www.test.com")!
-        
         do {
             let _ = try await networkManager.get(url: url)
         }catch {

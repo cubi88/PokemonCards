@@ -7,18 +7,24 @@
 
 import Foundation
 
-struct PokemonListData: Codable, Hashable {
+struct PokemonListData: Decodable, Hashable {
     var data: [Pokemon]
 }
-struct Pokemon: Codable, Hashable {
+struct Pokemon: Decodable, Hashable {
     var id: String
     let name: String
     let images: Images
+    var smallImageUrl: URL? {
+        return URL(string: images.small)
+    }
+    var largeImageUrl: URL? {
+        return URL(string: images.large)
+    }
 }
-struct Images: Codable, Hashable {
+struct Images: Decodable, Hashable {
     let small: String
     let large: String
 }
-struct PokemonImageData: Codable, Hashable {
+struct PokemonImageData: Decodable, Hashable {
     var data: [String]
 }

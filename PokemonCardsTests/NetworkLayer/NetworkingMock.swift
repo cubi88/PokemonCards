@@ -9,7 +9,6 @@ import Foundation
 
 class NetworkingMock: Networking {
     static var data: Data?
-
     func data(
         from url: URL,
         delegate: URLSessionTaskDelegate?

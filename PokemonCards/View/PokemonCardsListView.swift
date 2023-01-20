@@ -8,29 +8,30 @@
 import SwiftUI
 
 struct PokemonCardsListView: View {
-    
-    @StateObject var viewModel : PokemonCardsListViewModel
-    let columns = [ GridItem(), GridItem()]
-    
+    @StateObject var viewModel: PokemonCardsListViewModel
+    private let columns = [ GridItem(), GridItem()]
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(self.viewModel.pokemonCards, id: \.id) { pokemon in
-                        NavigationLink(value: pokemon) {
-                            PokemonCellView(image: pokemon.images.small, name: pokemon.name)
-                        }
-                    }
-                    VStack(alignment: .leading, spacing: 4) {
-                    }
+                pokemonGrid
+            }
+            .navigationTitle("Pokemon Cards")
+            .onAppear{
+                viewModel.getPokemonCards(urlStr: Endpoint.pokemonUrl)
+            }
+            .navigationDestination(for: Pokemon.self) { pokemon in
+                if let url = pokemon.largeImageUrl {
+                    PokemonCardsDetailView(name: pokemon.name, url: url)
                 }
-                .navigationTitle("Pokemon Cards")
-                .onAppear{
-                    viewModel.getPokemonCards(urlStr: Endpoint.pokemonUrl)
-                }
-                .navigationDestination(for: Pokemon.self) { pokemon in
-                    VStack {
-                        PokemonCardsDetailView(name: pokemon.name, image: pokemon.images.large)
+            }
+        }
+    }
+    private var pokemonGrid: some View {
+        LazyVGrid(columns: columns) {
+            ForEach(self.viewModel.pokemonCards, id: \.id) { pokemon in
+                NavigationLink(value: pokemon) {
+                    if let url = pokemon.smallImageUrl {
+                        PokemonCellView(imageUrl: url, name: pokemon.name)
                     }
                 }
             }

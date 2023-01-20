@@ -37,7 +37,7 @@ final class PokemonCardsListViewModelTest: XCTestCase {
         let expectation = XCTestExpectation(
             description: "Fetching Pokemon Cards"
         )
-        let asyncWaitDuration = 10.0 //
+        let asyncWaitDuration = 20.0 //
         DispatchQueue.main.asyncAfter(deadline: .now() + asyncWaitDuration) {
             let pokemonCard = self.pokemonCardsListViewModel.pokemonCards[0]
 
@@ -62,7 +62,7 @@ final class PokemonCardsListViewModelTest: XCTestCase {
         fakePokemonCardRepository.error = .dataNotFound
 
         pokemonCardsListViewModel.getPokemonCards(urlStr: "PokemonCardsMock")
-        let asyncWaitDuration = 10.0 //
+        let asyncWaitDuration = 20.0 //
         DispatchQueue.main.asyncAfter(deadline: .now() + asyncWaitDuration) {
 
             

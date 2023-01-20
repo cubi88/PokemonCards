@@ -28,6 +28,8 @@
 		30DDB6902979F52C006F0BFF /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDB68F2979F52C006F0BFF /* Networking.swift */; };
 		30DDB69B2979FB4B006F0BFF /* NetworkingMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDB6992979FB4B006F0BFF /* NetworkingMock.swift */; };
 		30DDB69C2979FB4B006F0BFF /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDB69A2979FB4B006F0BFF /* NetworkManagerTests.swift */; };
+		30DDB69E297AA846006F0BFF /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDB69D297AA846006F0BFF /* NetworkError.swift */; };
+		30DDB6A0297AB2EC006F0BFF /* PokemonAsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DDB69F297AB2EC006F0BFF /* PokemonAsyncImageView.swift */; };
 		8B9516A42954D30E00B600BF /* PokemonCardsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9516A32954D30E00B600BF /* PokemonCardsRepository.swift */; };
 		8B9516A72954D3D800B600BF /* PokemonCardsRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9516A52954D3D800B600BF /* PokemonCardsRepositoryTest.swift */; };
 		8B9516A82954D3D800B600BF /* FakePokemonCardsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B9516A62954D3D800B600BF /* FakePokemonCardsRepository.swift */; };
@@ -75,6 +77,8 @@
 		30DDB68F2979F52C006F0BFF /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		30DDB6992979FB4B006F0BFF /* NetworkingMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingMock.swift; sourceTree = "<group>"; };
 		30DDB69A2979FB4B006F0BFF /* NetworkManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		30DDB69D297AA846006F0BFF /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		30DDB69F297AB2EC006F0BFF /* PokemonAsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAsyncImageView.swift; sourceTree = "<group>"; };
 		8B9516A32954D30E00B600BF /* PokemonCardsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonCardsRepository.swift; sourceTree = "<group>"; };
 		8B9516A52954D3D800B600BF /* PokemonCardsRepositoryTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonCardsRepositoryTest.swift; sourceTree = "<group>"; };
 		8B9516A62954D3D800B600BF /* FakePokemonCardsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakePokemonCardsRepository.swift; sourceTree = "<group>"; };
@@ -129,6 +133,7 @@
 				30C816E22950A1A7001EA31A /* PokemonCardsListView.swift */,
 				30C816B32950A079001EA31A /* PokemonCardsDetailView.swift */,
 				3098608A295337B900A9BCB4 /* PokemonCellView.swift */,
+				30DDB69F297AB2EC006F0BFF /* PokemonAsyncImageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				30C816DC2950A187001EA31A /* NetworkManager.swift */,
 				30C816DE2950A187001EA31A /* Fetchable.swift */,
 				30DDB68F2979F52C006F0BFF /* Networking.swift */,
+				30DDB69D297AA846006F0BFF /* NetworkError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -220,7 +226,6 @@
 			children = (
 				3098608E295338F900A9BCB4 /* FakeNetworkManager.swift */,
 				8B9516A52954D3D800B600BF /* PokemonCardsRepositoryTest.swift */,
-				3098609029533A3900A9BCB4 /* PokemonCardsMock.json */,
 			);
 			path = RespositoryTest;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 			children = (
 				30DDB6992979FB4B006F0BFF /* NetworkingMock.swift */,
 				30DDB69A2979FB4B006F0BFF /* NetworkManagerTests.swift */,
+				3098609029533A3900A9BCB4 /* PokemonCardsMock.json */,
 			);
 			path = NetworkLayer;
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 			files = (
 				8B9516A42954D30E00B600BF /* PokemonCardsRepository.swift in Sources */,
 				30DDB6902979F52C006F0BFF /* Networking.swift in Sources */,
+				30DDB6A0297AB2EC006F0BFF /* PokemonAsyncImageView.swift in Sources */,
 				30C816EA2950A277001EA31A /* Pokemon.swift in Sources */,
 				30C816E32950A1A7001EA31A /* PokemonCardsListView.swift in Sources */,
 				30C816E82950A26F001EA31A /* PokemonCardsListViewModel.swift in Sources */,
@@ -383,6 +390,7 @@
 				309860982954BA0B00A9BCB4 /* Endpoint.swift in Sources */,
 				3098608B295337B900A9BCB4 /* PokemonCellView.swift in Sources */,
 				30C816B42950A079001EA31A /* PokemonCardsDetailView.swift in Sources */,
+				30DDB69E297AA846006F0BFF /* NetworkError.swift in Sources */,
 				30C816E12950A187001EA31A /* Fetchable.swift in Sources */,
 				30C816B22950A079001EA31A /* PokemonCardsApp.swift in Sources */,
 			);

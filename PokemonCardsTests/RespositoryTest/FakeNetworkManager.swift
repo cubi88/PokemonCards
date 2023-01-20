@@ -8,7 +8,6 @@
 import Foundation
 @testable import PokemonCards
 
-
 class FakeNetworkManager: Fetchable {
     func get(url: URL) async throws -> Data {
         do {
